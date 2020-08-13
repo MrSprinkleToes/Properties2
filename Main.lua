@@ -12,6 +12,8 @@ local Connections = {}
 local Settings = require(Modules.Settings)
 local ChangeHistoryService = game:GetService("ChangeHistoryService")
 
+local VERSION = "1.0"
+
 local SettingsTable, SettingsWidget = Settings.run(plugin)
 
 function CanShow(property)
