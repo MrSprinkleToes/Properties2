@@ -9,7 +9,7 @@ There are two ways of obtaining the plugin:
 - [Manually build the plugin](#manually-build-the-plugin) - *Do this if you don't want the plugin to stay updated automatically*
 ## From Roblox
 Choosing this option of obtaining the plugin means the plugin will automatically update for you. Just press install and you're done!
-In order to obtain the plugin from Roblox, simply [visit this website](https://example.org) and press `Install`!
+In order to obtain the plugin from Roblox, simply [visit this website](https://www.roblox.com/library/5553966117/Properties2) and press `Install`!
 <details>
   <summary>But I'm afraid that if I let the plugin update automatically, my work could be stolen!</summary>
   I completely understand this concern. The source code of the plugin will always be available at this repository, so feel free to check back here any time there's an update and check out what changes were made!
