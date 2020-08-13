@@ -1,5 +1,9 @@
 -- v:1.0
 
+if not game:GetService("RunService"):IsEdit() then
+	return
+end
+
 local PluginFolder = script.Parent
 local StudioWidgets = PluginFolder.StudioWidgets
 local Modules = PluginFolder.Modules
