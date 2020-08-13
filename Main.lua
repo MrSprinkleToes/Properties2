@@ -1,3 +1,7 @@
+-- for automatic updates
+local VERSION = 1.0
+
+-- rest of the variables
 local PluginFolder = script.Parent
 local StudioWidgets = PluginFolder.StudioWidgets
 local Modules = PluginFolder.Modules
