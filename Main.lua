@@ -1,7 +1,5 @@
 -- v:1.0
 
-repeat print("waiting") until not script.Parent.Builder
-
 local PluginFolder = script.Parent
 local StudioWidgets = PluginFolder.StudioWidgets
 local Modules = PluginFolder.Modules
