@@ -5,8 +5,8 @@ Lua-ified properties window for Roblox.
 ___
 # Using the plugin
 There are two ways of obtaining the plugin:
-- From Roblox - *Do this if you want the plugin to stay updated automatically*
-- Manually build the plugin - *Do this if you don't want the plugin to stay updated automatically*
+- [From Roblox](#from-roblox) - *Do this if you want the plugin to stay updated automatically*
+- [Manually build the plugin](#manually-build-the-plugin) - *Do this if you don't want the plugin to stay updated automatically*
 ## From Roblox
 Choosing this option of obtaining the plugin means the plugin will automatically update for you. Just press install and you're done!
 In order to obtain the plugin from Roblox, simply [visit this website](https://example.org) and press `Install`!
