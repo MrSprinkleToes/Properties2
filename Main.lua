@@ -1,7 +1,3 @@
--- for automatic updates
-local VERSION = 1.0
-
--- rest of the variables
 local PluginFolder = script.Parent
 local StudioWidgets = PluginFolder.StudioWidgets
 local Modules = PluginFolder.Modules
@@ -14,6 +10,7 @@ local DontShow = require(Modules.DontShow)
 local CategoryOrder = require(Modules.CategoryOrder)
 local Connections = {}
 local Settings = require(Modules.Settings)
+local ChangeHistoryService = game:GetService("ChangeHistoryService")
 
 local SettingsTable, SettingsWidget = Settings.run(plugin)
 
@@ -27,9 +24,9 @@ function CanShow(property)
 end
 
 local Classes = {}
-table.foreach(Dump.Classes, function(_, ClassTable)
+for _, ClassTable in pairs(Dump.Classes) do
 	Classes[ClassTable.Name] = ClassTable
-end)
+end
 
 -- configuration
 local PLUGIN_NAME = "Properties2"
@@ -99,18 +96,18 @@ function round(num, numDecimalPlaces)
 end
 
 function StringTo3NumberThingy(str)
-	local n1, n2, n3 = string.match(str, "(-?%d*)%s*,%s*(-?%d*)%s*,%s*(-?%d*)")
+	local n1, n2, n3 = string.match(str, "(%-?%d+%.?%d*)%s*,%s*(%-?%d+%.?%d*)%s*,%s*(%-?%d+%.?%d*)")
 	return tonumber(n1), tonumber(n2), tonumber(n3)
 end
 
 function Clear()
 	-- clear all connections
-	table.foreachi(Connections, function(index, connection)
+	for index, connection in ipairs(Connections) do
 		if connection then
 			connection:Disconnect()
 		end
 		table.remove(Connections, index)
-	end)
+	end
 	for _, Child in pairs(Container:GetChildren()) do
 		if Child ~= UIListLayout then
 			Child:Destroy()
@@ -274,6 +271,7 @@ function RenderProperties(item)
 				else
 					item[PropertyName] = newValue
 				end
+				ChangeHistoryService:SetWaypoint("Property change")
 			end)
 			
 			local Connection = item:GetPropertyChangedSignal(PropertyName):Connect(function()
