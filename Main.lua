@@ -283,8 +283,10 @@ function run()
 					end
 					if Property.ValueType.Name == "Vector3" or Property.ValueType.Name == "Color3" then
 						local n1, n2, n3 = StringTo3NumberThingy(newValue)
-						item[PropertyName] = Vector3.new(n1, n2, n3)
-						if Property.ValueType.Name == "Color3" then
+						if Property.ValueType.Name == "Vector3" then
+							item[PropertyName] = Vector3.new(n1, n2, n3)
+						elseif Property.ValueType.Name == "Color3" then
+							item[PropertyName] = Color3.new(n1, n2, n3)
 							Input:GetFrame().ColorDisplay.BackgroundColor3 = item[PropertyName]
 						end
 					elseif Property.ValueType.Name == "number" then
