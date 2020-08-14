@@ -1,5 +1,5 @@
 local Main = {}
--- v:1.0
+-- v:1.1
 local plugin
 
 function Main.init(pluginRef)
@@ -48,10 +48,14 @@ function run()
 	local CustomTextButton = require(StudioWidgets.CustomTextButton)
 	local LabeledColorInput = require(StudioWidgets.LabeledColorInput)
 
-	-- Define + create widget (window)
+	-- Define + create widget (window) & toolbar button
+	local Toolbar = plugin:CreateToolbar("Properties2")
+	local ToolbarButton = Toolbar:CreateButton("Open", "Open Properties2", "rbxassetid://5554565291", "Open Properties2")
+	ToolbarButton.ClickableWhenViewportHidden = true
+	
 	local WInfo = DockWidgetPluginGuiInfo.new(
 		Enum.InitialDockState.Right,
-		true,
+		false,
 		true,
 		200,
 		300,
@@ -60,7 +64,11 @@ function run()
 	)
 	local Widget = plugin:CreateDockWidgetPluginGui("Main", WInfo)
 	Widget.Title = PLUGIN_NAME
-
+	
+	ToolbarButton.Click:Connect(function()
+		Widget.Enabled = not Widget.Enabled
+	end)
+	
 	-- important code below
 	local SettingsButton = Instance.new("ImageButton")
 	SettingsButton.Image = "rbxasset://textures/ui/Settings/MenuBarIcons/GameSettingsTab.png"
