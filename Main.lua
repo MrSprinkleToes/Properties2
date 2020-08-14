@@ -283,9 +283,9 @@ function run()
 					end
 					if Property.ValueType.Name == "Vector3" or Property.ValueType.Name == "Color3" then
 						local n1, n2, n3 = StringTo3NumberThingy(newValue)
-						n1 = n1 or 0
-						n2 = n2 or 0
-						n3 = n3 or 0
+						if not n1 then n1 = 0 end
+						if not n2 then n2 = 0 end
+						if not n3 then n3 = 0 end
 						if Property.ValueType.Name == "Vector3" then
 							item[PropertyName] = Vector3.new(n1, n2, n3)
 						elseif Property.ValueType.Name == "Color3" then
