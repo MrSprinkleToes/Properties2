@@ -43,7 +43,7 @@ function LabeledColorInputClass.new(nameSuffix, labelText, defaultValue)
 
 	-- Dumb hack to add padding to text box,
 	local ColorFrame = Instance.new("Frame")
-	ColorFrame.Name = "Wrapper"
+	ColorFrame.Name = "ColorDisplay"
 	ColorFrame.Size = UDim2.new(0, 12, 0, 12)
 	ColorFrame.Position = UDim2.new(0, GuiUtilities.StandardLineElementLeftMargin, .5, 0)
 	ColorFrame.AnchorPoint = Vector2.new(0, .5)
