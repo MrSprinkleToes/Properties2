@@ -25,6 +25,8 @@ When you build the plugin yourself you get the latest version of the plugin. **I
 print("Building Properties2...")
 
 local HTTP = game:GetService("HttpService")
+local isHttpEnabled = HTTP.HttpEnabled
+HTTP.HttpEnabled = true
 local Request
 local success = pcall(function()
 	Request = HTTP:GetAsync("https://api.github.com/repos/MrSprinkleToes/Properties2/contents/")
@@ -63,6 +65,8 @@ local Runner = Instance.new("Script")
 Runner.Name = "Runner"
 Runner.Source = "require(script.Parent.Main).init(plugin)"
 Runner.Parent = Properties2
+
+HTTP.HttpEnabled = isHttpEnabled
 
 print("Properties2 has been built! Right click the folder in the Workspace and click \"Save as Local Plugin...\"")
 ```
