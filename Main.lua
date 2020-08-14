@@ -286,7 +286,7 @@ function run()
 						if Property.ValueType.Name == "Vector3" then
 							item[PropertyName] = Vector3.new(n1, n2, n3)
 						elseif Property.ValueType.Name == "Color3" then
-							item[PropertyName] = Color3.fromRGB(n1, n2, n3)
+							item[PropertyName] = Color3.new(n1 * 255, n2 * 255, n3 * 255)
 							Input:GetFrame().ColorDisplay.BackgroundColor3 = item[PropertyName]
 						end
 					elseif Property.ValueType.Name == "number" then
