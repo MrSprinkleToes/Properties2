@@ -281,9 +281,12 @@ function run()
 					if Input:GetFrame():FindFirstChild("Wrapper") and not Input:GetFrame().Wrapper.TextBox:IsFocused() then
 						return
 					end
-					if Property.ValueType.Name == "Vector3" then
+					if Property.ValueType.Name == "Vector3" or Property.ValueType.Name == "Color3" then
 						local n1, n2, n3 = StringTo3NumberThingy(newValue)
 						item[PropertyName] = Vector3.new(n1, n2, n3)
+						if Property.ValueType.Name == "Color3" then
+							Input:GetFrame().ColorDisplay.BackgroundColor3 = item[PropertyName]
+						end
 					elseif Property.ValueType.Name == "number" then
 						item[PropertyName] = tonumber(newValue)
 					else
