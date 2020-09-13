@@ -77,10 +77,19 @@ function run()
 	SettingsButton.Position = UDim2.new(1, -5, 1, -5)
 	SettingsButton.BackgroundTransparency = 1
 	SettingsButton.ZIndex = 2
-	SettingsButton.Parent = Widget
+	SettingsButton.Parent = Widge
+	ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.Button Enum.StudioStyleGuideModifier.Default)
+	
 	SettingsButton.MouseButton1Click:Connect(function()
 		local Visibility = not SettingsWidget.Enabled
 		SettingsWidget.Enabled = Visibility
+			
+		--Colour the button when active
+		if Visibility == true then 
+			ThemeService:AddItem(SettingsButton, "ImageColor3", EEnum.StudioStyleGuideColor.Button Enum.StudioStyleGuideModifier.Pressed)
+		else
+			ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.Button Enum.StudioStyleGuideModifier.Default)
+		end
 	end)
 
 	local Container = Instance.new("ScrollingFrame")
