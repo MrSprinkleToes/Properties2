@@ -1,3 +1,4 @@
+print("v1")
 local Main = {}
 -- v:1.1
 local plugin
