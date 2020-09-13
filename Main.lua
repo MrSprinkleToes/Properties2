@@ -315,6 +315,13 @@ function run()
 				end)
 			end)
 		end
+		
+		--Update Canvas size
+		local canvasOffsetYNew = 0
+		for _, propertyContainer in pairs(container:GetChildren()) do
+			canvasOffsetYNew = canvasOffsetYNew + propertyContainer.Size.Y.Offset
+		end
+		container.CanvasSize = UDim2.new(0, 0, 0, canvasOffsetYNew)
 	end
 end
 
