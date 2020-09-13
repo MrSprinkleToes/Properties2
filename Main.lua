@@ -77,7 +77,7 @@ function run()
 	SettingsButton.Position = UDim2.new(1, -5, 1, -5)
 	SettingsButton.BackgroundTransparency = 1
 	SettingsButton.ZIndex = 2
-	SettingsButton.Parent = Widge
+	SettingsButton.Parent = Widget
 	ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.Button, Enum.StudioStyleGuideModifier.Default)
 	
 	SettingsButton.MouseButton1Click:Connect(function()
