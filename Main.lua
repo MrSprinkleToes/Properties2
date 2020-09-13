@@ -131,6 +131,7 @@ function run()
 				Child:Destroy()
 			end
 		end
+		Container.CanvasSize = UDim2.new(0, 0, 0, 0)
 	end
 
 	-- the most important function
