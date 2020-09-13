@@ -315,6 +315,15 @@ function run()
 				end)
 			end)
 		end
+		
+		--Get updated canvas size
+		local newCanvasSizeOffset = 0
+		for _, collapsable in pairs(container:GetChildren()) do
+			if collapsable.ClassName == "ScrollingFrame" then
+				newCanvasSizeOffset = newCanvasSizeOffset + collapsable.Size.Y.Offset
+			end
+		end
+		container.CanvasSize = UDim2.new(0, 0, 0, newCanvasSizeOffset)
 	end
 end
 
