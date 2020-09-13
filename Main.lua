@@ -1,4 +1,4 @@
-print("v2")
+print("v3")
 local Main = {}
 -- v:1.1
 local plugin
@@ -328,12 +328,13 @@ function run()
 			end
 		end
 		Container.CanvasSize = UDim2.new(0, 0, 0, newYOffset)
+		print("applied new canvas size [y pixels]: "..newYOffset)
 	end
-	Container.ChildAdded:connect(function(categoryFrame)
+	Container.ChildAdded:Connect(function(categoryFrame)
 		descendantsSizeChanged()
 		categoryFrame:GetPropertyChangedSignal("Size"):Connect(descendantsSizeChanged)
 	end)
-	Container.ChildRemoving:connect(descendantsSizeChanged)
+	Container.ChildRemoved:Connect(descendantsSizeChanged)
 end
 
 return Main
