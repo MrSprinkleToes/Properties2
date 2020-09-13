@@ -1,4 +1,4 @@
-print("v3")
+print("v4")
 local Main = {}
 -- v:1.1
 local plugin
@@ -323,7 +323,7 @@ function run()
 	function descendantsSizeChanged()
 		local newYOffset = 0
 		for _, child in pairs(Container:GetChildren()) do
-			if child.ClassName == "ScrollingFrame" then
+			if child.ClassName == "Frame" then
 				newYOffset = newYOffset + child.Size.Y.Offset
 			end
 		end
