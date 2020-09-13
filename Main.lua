@@ -99,9 +99,8 @@ function run()
 	Selection.SelectionChanged:Connect(function()
 		local selected = Selection:Get()
 		if #selected == 1 then
-			local success, msg = pcall(function() Widget.Title = PLUGIN_NAME end)
+			local success, msg = pcall(function() Widget.Title = string.format("%s \"%s\"", selected[1].ClassName, selected[1].Name) end)
 			if success then
-				Widget.Title = string.format("%s \"%s\"", selected[1].ClassName, selected[1].Name)
 				RenderProperties(selected[1])
 			else
 				Widget.Title = PLUGIN_NAME
