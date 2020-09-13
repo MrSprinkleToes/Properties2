@@ -316,12 +316,19 @@ function run()
 				end)
 			end)
 		end
-		
 		--Update Canvas size based on child elements
 		local canvasOffsetYNew = 0
 		for _, propertyContainer in pairs(Container:GetChildren()) do
 			if propertyContainer:IsA("ScrollingFrame") then
+				local currentYOffset = propertyContainer.Size.Y.Offset
 				canvasOffsetYNew = canvasOffsetYNew + propertyContainer.Size.Y.Offset
+				propertyContainer:GetPropertyChangedSignal("Size"):Connect(function() --Automatically disconnected upon deletion
+					local differenceYOffset = propertyContainer.Size.Y.Offset - currentYOffset 
+					currentYOffset = propertyContainer.Size.Y.Offset
+					canvasOffsetYNew = canvasOffsetYNew + differenceYOffset
+					Container.CanvasSize = UDim2.new(0, 0, 0, canvasOffsetYNew)
+					print(canvasOffsetYNew)
+				end)
 			end
 		end
 		Container.CanvasSize = UDim2.new(0, 0, 0, canvasOffsetYNew)
