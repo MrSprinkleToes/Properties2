@@ -100,8 +100,16 @@ function run()
 		local selected = Selection:Get()
 
 		if #selected == 1 then
-			Widget.Title = string.format("%s \"%s\"", selected[1].ClassName, selected[1].Name)
-			RenderProperties(selected[1])
+			local isError, msg = pcall(function() Widget.Title = PLUGIN_NAME end)
+			
+			if not isError then
+				Widget.Title = string.format("%s \"%s\"", selected[1].ClassName, selected[1].Name)
+				RenderProperties(selected[1])
+			else
+				Widget.Title = PLUGIN_NAME
+				Clear()
+				if string.find(string.lower(msg), "(lacking permission 5)") then error(isError) end
+			end
 		elseif #selected == 0 then
 			Widget.Title = PLUGIN_NAME
 			Clear()
