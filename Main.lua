@@ -317,10 +317,12 @@ function run()
 			end)
 		end
 		
-		--Update Canvas size
+		--Update Canvas size based on child elements
 		local canvasOffsetYNew = 0
 		for _, propertyContainer in pairs(Container:GetChildren()) do
-			canvasOffsetYNew = canvasOffsetYNew + propertyContainer.Size.Y.Offset
+			if propertyContainer:IsA("ScrollingFrame") then
+				canvasOffsetYNew = canvasOffsetYNew + propertyContainer.Size.Y.Offset
+			end
 		end
 		Container.CanvasSize = UDim2.new(0, 0, 0, canvasOffsetYNew)
 	end
