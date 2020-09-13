@@ -78,7 +78,7 @@ function run()
 	SettingsButton.BackgroundTransparency = 1
 	SettingsButton.ZIndex = 2
 	SettingsButton.Parent = Widget
-	ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.Button, Enum.StudioStyleGuideModifier.Default)
+	ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.MainButton, Enum.StudioStyleGuideModifier.Default)
 	
 	SettingsButton.MouseButton1Click:Connect(function()
 		local Visibility = not SettingsWidget.Enabled
@@ -86,9 +86,9 @@ function run()
 			
 		--Colour the button when active
 		if Visibility == true then 
-			ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.Button, Enum.StudioStyleGuideModifier.Pressed)
+			ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.MainButton, Enum.StudioStyleGuideModifier.Pressed)
 		else
-			ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.Button, Enum.StudioStyleGuideModifier.Default)
+			ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.MainButton, Enum.StudioStyleGuideModifier.Default)
 		end
 	end)
 
