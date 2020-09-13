@@ -98,17 +98,15 @@ function run()
 
 	Selection.SelectionChanged:Connect(function()
 		local selected = Selection:Get()
-
 		if #selected == 1 then
-			local isError, msg = pcall(function() Widget.Title = PLUGIN_NAME end)
-			
-			if not isError then
+			local success, msg = pcall(function() Widget.Title = PLUGIN_NAME end)
+			if success then
 				Widget.Title = string.format("%s \"%s\"", selected[1].ClassName, selected[1].Name)
 				RenderProperties(selected[1])
 			else
 				Widget.Title = PLUGIN_NAME
 				Clear()
-				if string.find(string.lower(msg), "(lacking permission 5)") then error(isError) end
+				if not string.find(string.lower(msg), "(lacking permission 5)") then error(msg) end
 			end
 		elseif #selected == 0 then
 			Widget.Title = PLUGIN_NAME
