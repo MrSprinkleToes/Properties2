@@ -1,4 +1,4 @@
-print("v1")
+print("v2")
 local Main = {}
 -- v:1.1
 local plugin
@@ -134,7 +134,7 @@ function run()
 		end
 		Container.CanvasSize = UDim2.new(0, 0, 0, 0)
 	end
-
+	
 	-- the most important function
 	function RenderProperties(item)
 		Clear()
@@ -317,24 +317,23 @@ function run()
 				end)
 			end)
 		end
-		--Update Canvas size based on child elements
-		local canvasOffsetYNew = 0
-		for _, propertyContainer in pairs(Container:GetChildren()) do
-			if propertyContainer:IsA("ScrollingFrame") then
-				local currentYOffset = propertyContainer.Size.Y.Offset
-				canvasOffsetYNew = canvasOffsetYNew + propertyContainer.Size.Y.Offset
-				propertyContainer:GetPropertyChangedSignal("Size"):Connect(function() --Automatically disconnected upon deletion
-					local differenceYOffset = propertyContainer.Size.Y.Offset - currentYOffset 
-					currentYOffset = propertyContainer.Size.Y.Offset
-					canvasOffsetYNew = canvasOffsetYNew + differenceYOffset
-					Container.CanvasSize = UDim2.new(0, 0, 0, canvasOffsetYNew)
-					print(canvasOffsetYNew)
-				end)
+	end
+	
+	--Update 'Canvas' size based on child elements
+	function descendantsSizeChanged()
+		local newYOffset = 0
+		for _, child in pairs(Container:GetChildren()) do
+			if child.ClassName == "ScrollingFrame" then
+				newYOffset = newYOffset + child.Size.Y.Offset
 			end
 		end
-		Container.CanvasSize = UDim2.new(0, 0, 0, canvasOffsetYNew)
-		print(canvasOffsetYNew)
+		Container.CanvasSize = UDim2.new(0, 0, 0, newYOffset)
 	end
+	Container.ChildAdded:connect(function(categoryFrame)
+		descendantsSizeChanged()
+		categoryFrame:GetPropertyChangedSignal("Size"):Connect(descendantsSizeChanged)
+	end)
+	Container.ChildRemoving:connect(descendantsSizeChanged)
 end
 
 return Main
