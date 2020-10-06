@@ -72,7 +72,7 @@ print("Properties2 has been built! Right click the folder in the Workspace and c
 Once you've run the code, right click the new folder that has appeared in Workspace titled `Properties2` and press `Save as Local Plugin...`.
 ___
 # Credits
-- GammaSource - ThemeService
+- GammaShock - ThemeService
 - StudioWidgets contributors - [StudioWidgets](https://github.com/Roblox/StudioWidgets)
 - [zeuxcg](https://twitter.com/zeuxcg) (Arseny Kapoulkine) - Helped me figure out how Roblox Studio displays properties
 - starmaq - Introduced me to StudioWidgets
