@@ -78,9 +78,18 @@ function run()
 	SettingsButton.BackgroundTransparency = 1
 	SettingsButton.ZIndex = 2
 	SettingsButton.Parent = Widget
+	ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.MainText, Enum.StudioStyleGuideModifier.Default)
+	
 	SettingsButton.MouseButton1Click:Connect(function()
 		local Visibility = not SettingsWidget.Enabled
 		SettingsWidget.Enabled = Visibility
+			
+		--Colour the button when active
+		if Visibility == true then 
+			ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.CheckedFieldIndicator, Enum.StudioStyleGuideModifier.Pressed)
+		else
+			ThemeService:AddItem(SettingsButton, "ImageColor3", Enum.StudioStyleGuideColor.MainText, Enum.StudioStyleGuideModifier.Default)
+		end
 	end)
 
 	local Container = Instance.new("ScrollingFrame")
@@ -98,10 +107,15 @@ function run()
 
 	Selection.SelectionChanged:Connect(function()
 		local selected = Selection:Get()
-
 		if #selected == 1 then
-			Widget.Title = string.format("%s \"%s\"", selected[1].ClassName, selected[1].Name)
-			RenderProperties(selected[1])
+			local success, msg = pcall(function() Widget.Title = string.format("%s \"%s\"", selected[1].ClassName, selected[1].Name) end)
+			if success then
+				RenderProperties(selected[1])
+			else
+				Widget.Title = PLUGIN_NAME
+				Clear()
+				if not string.find(string.lower(msg), "(lacking permission 5)") then error(msg) end
+			end
 		elseif #selected == 0 then
 			Widget.Title = PLUGIN_NAME
 			Clear()
@@ -131,8 +145,9 @@ function run()
 				Child:Destroy()
 			end
 		end
+		Container.CanvasSize = UDim2.new(0, 0, 0, 0)
 	end
-
+	
 	-- the most important function
 	function RenderProperties(item)
 		Clear()
@@ -316,6 +331,23 @@ function run()
 			end)
 		end
 	end
+	
+	--Update 'Canvas' size based on child elements
+	function descendantsSizeChanged()
+		local newYOffset = 0
+		for _, child in pairs(Container:GetChildren()) do
+			if child.ClassName == "Frame" then
+				newYOffset = newYOffset + child.Size.Y.Offset
+			end
+		end
+		Container.CanvasSize = UDim2.new(0, 0, 0, newYOffset)
+		--print("applied new canvas size [y pixels]: "..newYOffset)
+	end
+	Container.ChildAdded:Connect(function(categoryFrame)
+		descendantsSizeChanged()
+		categoryFrame:GetPropertyChangedSignal("Size"):Connect(descendantsSizeChanged)
+	end)
+	Container.ChildRemoved:Connect(descendantsSizeChanged)
 end
 
 return Main
